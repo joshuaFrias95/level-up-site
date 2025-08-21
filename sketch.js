@@ -5,7 +5,7 @@ let fireworkTimer = 0;
 let textTimer = 0;
 
 function preload() {
-  pixelFont = loadFont('../fonts/PressStart2P-Regular.ttf');
+  pixelFont = loadFont('fonts/PressStart2P-Regular.ttf');
 }
 
 function setup() {

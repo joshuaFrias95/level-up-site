@@ -7,22 +7,22 @@
   font-style: normal;
 }
 
-.levelup-title {
+.levelup-title, .levelup-subtitle {
   font-family: 'arcadeI', sans-serif;
   font-size: 4.5rem;
   text-align: center;
   background: linear-gradient(to right, #00ffff, #ff00ff, #00aaff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 0 #000, 4px 4px 0 #b5c904;
   letter-spacing: 5px;
   animation: flicker 1s infinite;
   transition: all 0.3s ease-in-out;
 
-  &:hover {
-    color: #ffff00;
-    text-shadow: 0 0 8px #ff00ff, 0 0 12px #00ffff;
-  }
+}
+
+.levelup-subtitle {
+  font-size: 3.5em;
+  letter-spacing: 0.06em 
 }
 
 @keyframes flicker {

@@ -4,8 +4,6 @@ let floatingTexts = [];
 let fireworkTimer = 0;
 let textTimer = 0;
 
-function preload() {
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);

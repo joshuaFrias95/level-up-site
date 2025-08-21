@@ -21,10 +21,7 @@ function draw() {
 
   fireworkTimer++;
   if (fireworkTimer % 30 === 0) {
-    // Fuego artificial normal
     fireworks.push(new Firework());
-
-    // Fuego artificial en la esquina superior izquierda
     fireworks.push(new Firework(true));
   }
 
@@ -53,14 +50,11 @@ function draw() {
 }
 
 function drawCRTBackground() {
-  background(220, 80, 20);
-
-  for (let y = 0; y < height; y += 4) {
-    stroke(220, 80, 25, 0.1);
+  for (let y = 0; y < height; y++) {
+    let hue = map(y, 0, height, 280, 200); // púrpura a azul
+    stroke(hue, 100, 40);
     line(0, y, width, y);
   }
-
-  noStroke();
 }
 
 class Firework {

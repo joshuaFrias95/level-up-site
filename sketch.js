@@ -5,14 +5,13 @@ let fireworkTimer = 0;
 let textTimer = 0;
 
 function preload() {
-  // pixelFont = loadFont('fonts/PressStart2P-Regular.ttf');
+  pixelFont = loadFont('fonts/PressStart2P-Regular.ttf');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
-  // textFont(pixelFont);
-  textFont('monospace');
+  textFont(pixelFont);
   textSize(height < 600 ? 16 : 24); // texto más pequeño en pantallas pequeñas
   textAlign(CENTER, CENTER);
   noStroke();

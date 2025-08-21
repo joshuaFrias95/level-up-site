@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Level Up Gamehub</title>
-    <link rel="icon" href="assets/467772217_875847331384641_928400904333251906_n-removebg-preview.ico" type="image/x-icon">
+    <link rel="icon" href="assets/467772217_875847331384641_928400904333251906_n-removebg-preview.ico"
+        type="image/x-icon">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/sketch.css">
@@ -14,54 +15,88 @@
 <style>
 
 </style>
+
 <body>
     <div class="container-xxl text-center mt-4 pt-5">
         <h1 class="levelup-title">Level Up Game Hub</h1>
     </div>
     <div class="container-xxl text-center">
-        <img src="assets/logo.png" alt="level up logo" width="80%" class="logo-front my-2">
+        <img src="assets/logo.png" alt="level up logo" width="50%" class="logo-front my-2">
     </div>
     <div class="container text-center mt-3">
         <h3 class="levelup-subtitle">La</h2>
-        <h3 class="levelup-subtitle">Inauguracion</h2>
+            <h3 class="levelup-subtitle">Inauguracion</h2>
     </div>
 
+    <div class="py-4"></div>
     <div class="container w-50 my-5 p-auto center">
-  <div class="glass-card p-4 text-white">
-    <h2>La espera terminó</h2>
-    <p>Acompáñanos a nuestro evento bla,bla,bla con torneos de esto, el otro y aquello y con rol y tal para gente bien, bla bla, bla. Si que sí, esto es texto vacío que Gallardo deberia poder llenar</p>
-    <div class="container text-center mt-5">
-  <h2>🎉 ¡Faltan... 🎉</h2>
-  <h1 id="countdown" class="display-4 text-danger"></h1>
-  <p>...para nuestra gran inauguración. ¡No te lo pierdas!</p>
-</div>
+        <div class="glass-card p-4 text-white">
+            <h2>La espera terminó</h2>
+            <p>Acompáñanos a nuestro evento bla,bla,bla con torneos de esto, el otro y aquello y con rol y tal para
+                gente bien, bla bla, bla. Si que sí, esto es texto vacío que Gallardo deberia poder llenar</p>
+            <div class="container text-center mt-5">
+                <h2>🎉 ¡Nos vemos en... 🎉</h2>
+                <h1 id="countdown" class="display-4 text-danger py-2"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="container my-5">
+  <!-- Fila 1 -->
+  <div class="row mb-4">
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Ibozuke</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Hora del loot</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Otto Garay</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">El jugañor</h5>
+    </div>
+  </div>
 
+  <!-- Fila 2 -->
+  <div class="row">
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Mau DND</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Ashford</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Chibi Luo</h5>
+    </div>
+    <div class="glass-card col-md-3 py-2">
+        <h5 class="card-title">Duskhowler</h5>
+    </div>
   </div>
 </div>
 </body>
 
 <script>
-  const targetDate = new Date("2025-08-30T12:00:00-06:00"); // Hora Ciudad de México (UTC-6)
+    const targetDate = new Date("2025-08-30T12:00:00-06:00"); // Hora Ciudad de México (UTC-6)
 
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate.getTime() - now;
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate.getTime() - now;
 
-    if (distance < 0) {
-      document.getElementById("countdown").innerHTML = "🎉 ¡Ya comenzó!";
-      return;
+        if (distance < 0) {
+            document.getElementById("countdown").innerHTML = "🎉 ¡Ya comenzó!";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        document.getElementById("countdown").innerHTML =
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((distance / (1000 * 60)) % 60);
-    const seconds = Math.floor((distance / 1000) % 60);
-
-    document.getElementById("countdown").innerHTML =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
 
 </script>
 

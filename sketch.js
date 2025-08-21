@@ -13,7 +13,7 @@ function setup() {
   colorMode(HSB);
   // textFont(pixelFont);
   textFont('monospace');
-  textSize(24);
+  textSize(height < 600 ? 16 : 24); // texto más pequeño en pantallas pequeñas
   textAlign(CENTER, CENTER);
   noStroke();
 }
@@ -21,21 +21,18 @@ function setup() {
 function draw() {
   drawCRTBackground();
 
-  // Generar fuegos artificiales cada 30 frames (~0.5 seg)
   fireworkTimer++;
   if (fireworkTimer % 30 === 0) {
     fireworks.push(new Firework());
   }
 
-  // Generar textos "+1" cada 45 frames (~0.75 seg)
   textTimer++;
   if (textTimer % 45 === 0) {
     let x = random(width);
-    let y = random(height / 2, height - 100);
+    let y = random(height * 0.05, height * 0.1); // zona alta
     floatingTexts.push(new FloatingText("+1", x, y));
   }
 
-  // Mostrar fuegos artificiales
   for (let i = fireworks.length - 1; i >= 0; i--) {
     fireworks[i].update();
     fireworks[i].show();
@@ -54,11 +51,10 @@ function draw() {
 }
 
 function drawCRTBackground() {
-  background(220, 80, 20); // Azul marino base
+  background(220, 80, 20);
 
-  // Líneas horizontales tipo escaneo
   for (let y = 0; y < height; y += 4) {
-    stroke(220, 80, 25, 0.1); // Líneas muy sutiles
+    stroke(220, 80, 25, 0.1);
     line(0, y, width, y);
   }
 
@@ -72,15 +68,16 @@ class Firework {
     this.exploded = false;
     this.particles = [];
     this.velocity = random(-12, -8);
+    this.targetY = random(height * 0.05, height * 0.1); // zona alta
   }
 
   update() {
     if (!this.exploded) {
       this.y += this.velocity;
       this.velocity += 0.2;
-      if (this.velocity >= 0) {
+      if (this.y <= this.targetY) {
         this.exploded = true;
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) { // menos partículas para mejor rendimiento
           this.particles.push(new Particle(this.x, this.y));
         }
       }
@@ -128,7 +125,6 @@ class Particle {
   }
 }
 
-
 class FloatingText {
   constructor(txt, x, y) {
     this.txt = txt;
@@ -157,4 +153,8 @@ class FloatingText {
       text(txt[i], this.x - textWidth(txt) / 2 + i * charWidth, this.y);
     }
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

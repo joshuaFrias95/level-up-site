@@ -5,14 +5,13 @@ let fireworkTimer = 0;
 let textTimer = 0;
 
 function preload() {
-  // pixelFont = loadFont('fonts/PressStart2P-Regular.ttf');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
-  textFont('Press Start 2P');
-  textSize(height < 600 ? 16 : 24); // texto más pequeño en pantallas pequeñas
+  textFont('PressStart2P');
+  textSize(height < 600 ? 32 : 48);
   textAlign(CENTER, CENTER);
   noStroke();
 }
@@ -22,13 +21,17 @@ function draw() {
 
   fireworkTimer++;
   if (fireworkTimer % 30 === 0) {
+    // Fuego artificial normal
     fireworks.push(new Firework());
+
+    // Fuego artificial en la esquina superior izquierda
+    fireworks.push(new Firework(true));
   }
 
   textTimer++;
   if (textTimer % 45 === 0) {
     let x = random(width);
-    let y = random(height * 0.05, height * 0.1); // zona alta
+    let y = random(height);
     floatingTexts.push(new FloatingText("+1", x, y));
   }
 
@@ -61,22 +64,23 @@ function drawCRTBackground() {
 }
 
 class Firework {
-  constructor() {
-    this.x = random(width);
+  constructor(isLeft = false) {
+    this.x = isLeft ? random(width * 0.05, width * 0.4) : random(width);
     this.y = height;
     this.exploded = false;
     this.particles = [];
     this.velocity = random(-12, -8);
-    this.targetY = random(height * 0.05, height * 0.1); // zona alta
+    this.targetY = random(height * 0.1, height * 0.5);
   }
 
   update() {
     if (!this.exploded) {
       this.y += this.velocity;
-      this.velocity += 0.2;
-      if (this.y <= this.targetY) {
+      this.velocity += 0.15;
+
+      if (this.y <= this.targetY || this.velocity >= 0) {
         this.exploded = true;
-        for (let i = 0; i < 30; i++) { // menos partículas para mejor rendimiento
+        for (let i = 0; i < 40; i++) {
           this.particles.push(new Particle(this.x, this.y));
         }
       }
@@ -90,7 +94,7 @@ class Firework {
   show() {
     if (!this.exploded) {
       fill(0, 0, 100);
-      ellipse(this.x, this.y, 4);
+      ellipse(this.x, this.y, 6);
     } else {
       for (let p of this.particles) {
         p.show();
@@ -120,7 +124,7 @@ class Particle {
 
   show() {
     fill(random(360), 80, 100, this.life / 255);
-    ellipse(this.x, this.y, 3);
+    ellipse(this.x, this.y, 6);
   }
 }
 
@@ -138,6 +142,7 @@ class FloatingText {
   }
 
   show() {
+    textSize(height < 600 ? 32 : 48);
     let txt = this.txt;
     let steps = txt.length;
     let charWidth = textWidth(txt) / steps;

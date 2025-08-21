@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'PressStart2P';
+  src: url('https://joshuafrias95.github.io/level-up-site/fonts/PressStart2P-Regular.ttf') format('truetype');
+}
+
+
 canvas {
   position: fixed;
   top: 0;
